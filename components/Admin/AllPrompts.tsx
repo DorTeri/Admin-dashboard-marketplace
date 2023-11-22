@@ -4,6 +4,7 @@ import { Box, Modal, Select } from "@mui/material";
 import { BsPencil } from "react-icons/bs";
 import { useState } from "react";
 import { styles } from "@/utils/styles";
+import { updatePromptStatus } from "@/actions/prompt/updatePromptsStatus";
 
 type PromptsDataTypes = {
   id: string;
@@ -17,7 +18,8 @@ type PromptsDataTypes = {
 
 const AllPrompts = ({ data }: { data: any[] | undefined }) => {
   const [open, setOpen] = useState(false);
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('Pending' as 'Pending' | 'Live' | 'Declined');
+  const [promptId, setPromptId] = useState('')
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
@@ -31,7 +33,8 @@ const AllPrompts = ({ data }: { data: any[] | undefined }) => {
       flex: 0.5,
       renderCell: (params: any) => {
         return (
-          <div className="w-full flex items-center">
+          <div className="w-full flex items-center"
+            onClick={() => setPromptId(params.row.id)}>
             <span>{params.row.status || ""}</span>
             <BsPencil
               className="text-sm cursor-pointer ml-2"
@@ -53,6 +56,12 @@ const AllPrompts = ({ data }: { data: any[] | undefined }) => {
     purchased: prompt?.orders?.length,
     status: prompt.status
   }))
+
+  const handleUpdatePromptStatus = async () => {
+    await updatePromptStatus({ promptId, status });
+    setOpen(false)
+    window.location.reload()
+  }
 
   return (
     <>
@@ -125,14 +134,15 @@ const AllPrompts = ({ data }: { data: any[] | undefined }) => {
               name=""
               id=""
               className={`${styles.input} !mt-6 bg-transparent border rounded p-2`}
-              onChange={(e) => setStatus(e.target.value)}
+              onChange={(e) => setStatus(e.target.value as 'Pending' | 'Live' | 'Declined')}
             >
               <option value="Pending">Pending</option>
               <option value="Live">Live</option>
               <option value="Declined">Declined</option>
             </select>
             <br />
-            <button className={`${styles.button} bg-[#3f4cda] my-6 !h-[35px]`}>
+            <button className={`${styles.button} bg-[#3f4cda] my-6 !h-[35px]`}
+              onClick={handleUpdatePromptStatus}>
               Submit
             </button>
           </Box>
