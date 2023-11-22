@@ -16,6 +16,7 @@ import {
 } from "./Icon";
 import Link from "next/link";
 import Image from "next/image";
+import { useClerk } from "@clerk/nextjs";
 
 interface itemProps {
   title: string;
@@ -50,6 +51,7 @@ const Sidebar = ({ selected, setSelected }: Props) => {
   const [logout, setlogout] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { signOut } = useClerk()
 
   useEffect(() => setMounted(true), []);
 
@@ -57,8 +59,8 @@ const Sidebar = ({ selected, setSelected }: Props) => {
     return null;
   }
 
-  const logoutHandler = () => {
-    setlogout(true);
+  const logoutHandler = async () => {
+    await signOut();
   };
 
   return (
