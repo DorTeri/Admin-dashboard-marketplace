@@ -12,9 +12,10 @@ type PromptsDataTypes = {
   rating: number;
   purchased?: number;
   orders?: any[];
+  status?: string;
 };
 
-const AllPrompts = () => {
+const AllPrompts = ({ data }: { data: any[] | undefined }) => {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState('');
 
@@ -31,7 +32,7 @@ const AllPrompts = () => {
       renderCell: (params: any) => {
         return (
           <div className="w-full flex items-center">
-            <span>Pending</span>
+            <span>{params.row.status || ""}</span>
             <BsPencil
               className="text-sm cursor-pointer ml-2"
               onClick={() => setOpen(true)}
@@ -42,15 +43,16 @@ const AllPrompts = () => {
     },
   ];
 
-  const rows: Array<PromptsDataTypes> = [
-    {
-      id: "123",
-      name: "Prompt 1",
-      price: "100",
-      rating: 5,
-      purchased: 0,
-    },
-  ];
+  const rows: Array<PromptsDataTypes> = [];
+
+  data && data.map((prompt) => rows.push({
+    id: prompt.id,
+    name: prompt.name,
+    price: prompt.price,
+    rating: prompt.rating,
+    purchased: prompt?.orders?.length,
+    status: prompt.status
+  }))
 
   return (
     <>

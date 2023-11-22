@@ -2,10 +2,14 @@ import React, { FC } from "react";
 import Sidebar from "@/components/Sidebar";
 import Heading from "@/utils/Heading";
 import AllPrompts from "@/components/Admin/AllPrompts";
+import { GetPrompts } from "@/actions/prompt/getPrompts";
 
-interface Props {}
+interface Props { }
 
-const Page: FC<Props> = (props) => {
+const Page: FC<Props> = async (props) => {
+  const data = await GetPrompts()
+
+
   return (
     <div>
       <Heading
@@ -18,7 +22,7 @@ const Page: FC<Props> = (props) => {
           <Sidebar activeItem="All Prompts" />
         </div>
         <div className="2xl:w-[84%] w-[80%]">
-          <AllPrompts />
+          <AllPrompts data={data} />
         </div>
       </div>
     </div>
