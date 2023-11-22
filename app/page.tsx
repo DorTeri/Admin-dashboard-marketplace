@@ -2,11 +2,10 @@ import Sidebar from "@/components/Sidebar";
 import Heading from "@/utils/Heading";
 import DashboardWidgets from "@/components/Admin/DashboardWidgets";
 import { useIsAdmin } from "@/utils/useAdmin";
+import Error from "@/components/Error"
 
 const Page = async () => {
-  const isAdmin = await useIsAdmin()
-  if (!isAdmin) return null
-  
+
   return (
     <div>
       <Heading
@@ -15,7 +14,7 @@ const Page = async () => {
         keywords="Programming,MERN,Redux,Machine Learning"
       />
       <div className="flex min-h-screen">
-        <div className="2xl:w-[16%] w-1/5">
+      <div className="2xl:w-[16%] w-1/5">
           <Sidebar activeItem="Dashboard" />
         </div>
         <div className="2xl:w-[84%] w-[80%]">
