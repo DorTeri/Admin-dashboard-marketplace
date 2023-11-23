@@ -15,7 +15,7 @@ const Page = async () => {
       {isAdmin ? (
         <div>
           <Heading
-            title="Becodemy - Admin"
+            title="Bitprompt - Admin"
             description="Becodemy is a platform for students to learn and get help from teachers"
             keywords="Programming,MERN,Redux,Machine Learning"
           />
