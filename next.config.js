@@ -3,9 +3,9 @@ const nextConfig = {
     experimental: {
         serverActions: true,
     },
-    images:{
-        domains:['res.cloudinary.com']
-    }
+    images: {
+        domains: ["pixner.net", "res.cloudinary.com", 'img.clerk.com'],
+    },
 }
 
 module.exports = nextConfig

@@ -2,10 +2,12 @@ import React, { FC } from "react";
 import Sidebar from "@/components/Sidebar";
 import Heading from "@/utils/Heading";
 import AllShops from "@/components/Admin/AllShops";
+import { getAllShops } from "../../../actions/shops/getAllShops";
 
-interface Props {}
+interface Props { }
 
-const Page: FC<Props> = (props) => {
+const Page: FC<Props> = async (props) => {
+  const shopsData = await getAllShops()
   return (
     <div>
       <Heading
@@ -18,7 +20,7 @@ const Page: FC<Props> = (props) => {
           <Sidebar activeItem="Shops" />
         </div>
         <div className="2xl:w-[84%] w-[80%]">
-          <AllShops />
+          <AllShops shopsData={shopsData} />
         </div>
       </div>
     </div>

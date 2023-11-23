@@ -117,7 +117,7 @@ const Sidebar = ({ selected, setSelected }: Props) => {
               >
                 <Link href="/" className="block">
                   <h3 className="text-[25px] font-Poppins uppercase text-white">
-                    Becodemy
+                    Bitprompt
                   </h3>
                 </Link>
                 <IconButton

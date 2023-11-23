@@ -4,8 +4,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { AiOutlineMail } from "react-icons/ai";
 import Image from "next/image";
+import { format } from "timeago.js";
 
-const AllShops = () => {
+const AllShops = ({ shopsData }: { shopsData: any }) => {
   const columns = [
     { field: "id", headerName: "ID", flex: 0.3 },
     { field: "name", headerName: "Name", flex: 0.5 },
@@ -48,19 +49,20 @@ const AllShops = () => {
     },
   ];
 
-  const rows = [
-    {
-      id: "123456",
-      name: "John Doe",
-      email: "support@becodemy.com",
-      avatar:
-        "https://res.cloudinary.com/dkg6jv4l0/image/upload/v1688418919/avatars/sbtiws3u7astteqrvalt.jpg",
-      orders: 5,
-      prompts: 10,
-      ratings: 5,
-      created_at: "2022-01-01",
-    },
-  ];
+  const rows: any = [];
+
+  shopsData && shopsData.forEach((shop: any) => {
+    rows.push({
+      id: shop.id,
+      name: shop?.name,
+      email: shop?.user?.emailAddresses[0].emailAddress,
+      avatar: shop?.avatar,
+      orders: shop?.totalSales,
+      prompts: shop?.allProducts,
+      ratings: shop?.ratings,
+      created_at: format(shop?.createdAt)
+    })
+  })
 
   return (
     <Box m="20px">
