@@ -1,8 +1,10 @@
 import Sidebar from "@/components/Sidebar";
 import Heading from "@/utils/Heading";
 import AllUsers from "@/components/Admin/AllUsers";
+import { getAllUsers } from "@/actions/users/getAllUsers";
 
-const Page = () => {
+const Page = async () => {
+  const users = await getAllUsers()
   return (
     <div>
       <Heading
@@ -15,7 +17,7 @@ const Page = () => {
           <Sidebar activeItem="Users" />
         </div>
         <div className="2xl:w-[84%] w-[80%]">
-          <AllUsers />
+          <AllUsers users={users} />
         </div>
       </div>
     </div>
