@@ -136,9 +136,9 @@ const AllPrompts = ({ data }: { data: any[] | undefined }) => {
               className={`${styles.input} !mt-6 bg-transparent border rounded p-2`}
               onChange={(e) => setStatus(e.target.value as 'Pending' | 'Live' | 'Declined')}
             >
-              <option value="Pending">Pending</option>
-              <option value="Live">Live</option>
-              <option value="Declined">Declined</option>
+              <option value="Pending" className="!text-black">Pending</option>
+              <option value="Live" className="!text-black">Live</option>
+              <option value="Declined" className="!text-black">Declined</option>
             </select>
             <br />
             <button className={`${styles.button} bg-[#3f4cda] my-6 !h-[35px]`}
