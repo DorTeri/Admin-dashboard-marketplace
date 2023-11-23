@@ -3,10 +3,12 @@ import Heading from "@/utils/Heading";
 import DashboardWidgets from "@/components/Admin/DashboardWidgets";
 import { useIsAdmin } from "@/utils/useAdmin";
 import Error from "@/components/Error"
+import { getAllInvoices } from "@/actions/invoices/getAllInvoices";
 
 const Page = async () => {
 
   const isAdmin = await useIsAdmin()
+  const data = await getAllInvoices()
 
   return (
     <>
@@ -22,7 +24,7 @@ const Page = async () => {
               <Sidebar activeItem="Dashboard" />
             </div>
             <div className="2xl:w-[84%] w-[80%]">
-              <DashboardWidgets />
+              <DashboardWidgets data={data} />
             </div>
           </div>
         </div>

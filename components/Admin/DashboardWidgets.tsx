@@ -10,6 +10,7 @@ import OrdersAnalytics from "@/components/Admin/OrdersAnalytics";
 type Props = {
   open?: boolean;
   value?: number;
+  data?: any
 };
 
 const CircularProgressWithLabel: FC<Props> = ({ open, value }) => {
@@ -39,7 +40,7 @@ const CircularProgressWithLabel: FC<Props> = ({ open, value }) => {
   );
 };
 
-const DashboardWidgets: FC<Props> = ({ open }) => {
+const DashboardWidgets: FC<Props> = ({ open, data }) => {
   const [ordersComparePercentage, setOrdersComparePercentage] = useState<any>();
   const [userComparePercentage, setuserComparePercentage] = useState<any>();
 
@@ -98,7 +99,7 @@ const DashboardWidgets: FC<Props> = ({ open }) => {
             <h5 className="text-[#fff] text-[20px] font-[400] font-Poppins pb-3">
               Recent Transactions
             </h5>
-            <AllInvoices isDashboard={true} />
+            <AllInvoices isDashboard={true} data={data} />
           </div>
         </div>
       </div>
