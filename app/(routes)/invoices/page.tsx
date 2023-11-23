@@ -2,8 +2,10 @@ import React, { FC } from "react";
 import Sidebar from "@/components/Sidebar";
 import Heading from "@/utils/Heading";
 import AllInvoices from "@/components/Admin/AllInvoices";
+import { getAllInvoices } from "@/actions/invoices/getAllInvoices";
 
-const Page= () => {
+const Page = async () => {
+  const data = await getAllInvoices()
   return (
     <div>
       <Heading
@@ -16,7 +18,7 @@ const Page= () => {
           <Sidebar activeItem="Invoices" />
         </div>
         <div className="2xl:w-[84%] w-[80%]">
-          <AllInvoices isDashboard={false} />
+          <AllInvoices isDashboard={false} data={data} />
         </div>
       </div>
     </div>

@@ -3,49 +3,52 @@ import React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { AiOutlineMail } from "react-icons/ai";
+import { format } from "timeago.js";
 
-const AllInvoices = ({ isDashboard }: { isDashboard: boolean }) => {
+const AllInvoices = ({ isDashboard, data }: { isDashboard: boolean, data: any }) => {
   const columns = [
     { field: "id", headerName: "ID", flex: 0.3 },
     { field: "name", headerName: "Name", flex: isDashboard ? 0.6 : 0.5 },
     ...(isDashboard
       ? []
       : [
-          { field: "email", headerName: "Email", flex: 1 },
-          { field: "title", headerName: "Prompts Title", flex: 1 },
-        ]),
+        { field: "email", headerName: "Email", flex: 1 },
+        { field: "title", headerName: "Prompts Title", flex: 1 },
+      ]),
     { field: "price", headerName: "Price", flex: 0.5 },
     ...(isDashboard
       ? [{ field: "created_at", headerName: "Created At", flex: 0.5 }]
       : [
-          {
-            field: " ",
-            headerName: "Email",
-            flex: 0.2,
-            renderCell: (params: any) => {
-              return (
-                <a href={`mailto:${params.row.userEmail}`}>
-                  <AiOutlineMail
-                    className="dark:text-white text-black"
-                    size={20}
-                  />
-                </a>
-              );
-            },
+        {
+          field: " ",
+          headerName: "Email",
+          flex: 0.2,
+          renderCell: (params: any) => {
+            return (
+              <a href={`mailto:${params.row.userEmail}`}>
+                <AiOutlineMail
+                  className="dark:text-white text-black"
+                  size={20}
+                />
+              </a>
+            );
           },
-        ]),
+        },
+      ]),
   ];
 
-  const rows = [
-    {
-      id: "123456",
-      name: "John Doe",
-      email: "support@becodemy.com",
-      title: "How to become a fullstack developer",
-      price: "$100",
-      created_at: "2022-01-01",
-    },
-  ];
+  const rows: any = [];
+
+  data && data.forEach((invoice: any) => {
+    rows.push({
+      id: invoice.id,
+      name: invoice?.user?.firstName + " " + invoice?.user?.lastName,
+      email: invoice?.user?.emailAddresses[0].emailAddress,
+      title: invoice.prompt.name,
+      price: "US $" + invoice.prompt.price,
+      created_at: format(invoice.createdAt)
+    })
+  })
 
   return (
     <Box m={`${!isDashboard && "20px"}`}>
