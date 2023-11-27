@@ -138,7 +138,7 @@ const Sidebar = ({ selected, setSelected }: Props) => {
                   width={100}
                   height={100}
                   src={
-                    "https://res.cloudinary.com/dkg6jv4l0/image/upload/v1688418919/avatars/sbtiws3u7astteqrvalt.jpg"
+                    "https://api.deepai.org/job-view-file/0afff74d-54b6-4a8d-9b10-1122aa41c1b6/outputs/output.jpg"
                   }
                   style={{
                     cursor: "pointer",
@@ -153,7 +153,7 @@ const Sidebar = ({ selected, setSelected }: Props) => {
                   className="!text-[20px]  text-[#ffffffc1]"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Shahriar Sajeeb
+                  Dor Tayari
                 </Typography>
                 <Typography
                   variant="h6"
